@@ -29,7 +29,7 @@ public class DepartmentMapperTest {
 
     @Test
     public void updateDeptTest(){
-        Department department = new Department(null, "Tomsom", "鐮斿彂閮�");
+        Department department = new Department(null, "Tomsom", "鐮斿彂閮111�");
         int res = departmentMapper.updateDeptById(1, department);
         System.out.println(res);
     }
