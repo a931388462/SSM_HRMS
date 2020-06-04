@@ -4,12 +4,12 @@
     <ul class="nav nav-pills nav-stacked emp_sidebar">
         <li role="presentation" class="active">
             <a href="#" data-toggle="collapse" data-target="#collapse_emp">
-                <span class="glyphicon glyphicon-user" aria-hidden="true">员工管理</span>
+                <span class="glyphicon glyphicon-user" aria-hidden="true">个人中心</span>
             </a>
             <ul class="nav nav-pills nav-stacked" id="collapse_emp">
-                <li role="presentation"><a href="#" class="emp_info">员工信息</a></li>
-                <li role="presentation"><a href="#" role="button" class="emp_add_btn" data-toggle="modal" data-target=".emp-add-modal">员工新增</a></li>
-                <li role="presentation"><a href="#" class="emp_clearall_btn">员工清零</a></li>
+                <li role="presentation"><a href="#" class="emp_info">用户信息</a></li>
+                <li role="presentation"><a href="#" role="button" class="emp_add_btn" data-toggle="modal" data-target=".emp-add-modal">修改密码</a></li>
+                <li role="presentation"><a href="#" class="changPassword">修改密码</a></li>
             </ul>
         </li>
     </ul>
@@ -29,17 +29,17 @@
 </div><!-- /.panel-group，#hrms_sidebar_left -->
 
 <script type="text/javascript">
-    //跳转到员工页面
+    //跳转到用户信息
     $(".emp_info").click(function () {
         $(this).attr("href", "${pageContext.request.contextPath}"+"/hrms/emp/getEmpList");
+    });
+    //跳转到修改密码
+    $(".changPassword").click(function () {
+        $(this).attr("href", "${pageContext.request.contextPath}"+"/hrms/changePasswordPage");
     });
     //跳转到部门页面
     $(".dept_info").click(function () {
         $(this).attr("href", "${pageContext.request.contextPath}"+"/hrms/dept/getDeptList");
-    });
-    //员工清零这个功能暂未实现
-    $(".emp_clearall_btn").click(function () {
-        alert("对不起，您暂无权限进行操作！请先获取权限");
     });
     //部门清零这个功能暂未实现
     $(".dept_clearall_btn").click(function () {

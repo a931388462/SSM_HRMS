@@ -1,12 +1,18 @@
 package com.hrms.controller;
 
+import com.hrms.bean.TblEmp;
+import com.hrms.service.DepartmentService;
+import com.hrms.service.EmployeeService;
+import com.hrms.service.UserServiceImpl;
 import com.hrms.util.JsonMsg;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author GenshenWang.nomico
@@ -15,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(value = "/hrms")
 public class LoginController {
+
+    @Autowired
+    UserServiceImpl userServiceImpl;
 
     /**
      * 登录：跳转到登录页面
@@ -36,10 +45,22 @@ public class LoginController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         System.out.println(username + password);
-        if (!"admin1234".equals(username + password)){
-            return JsonMsg.fail().addInfo("login_error", "输入账号用户名与密码不匹配，请重新输入！");
+        TblEmp tblEmp = userServiceImpl.login(username, password);
+        if (tblEmp != null){
+            HttpSession session = request.getSession();
+            session.setAttribute("USER",tblEmp);
+            return JsonMsg.success();
         }
-        return JsonMsg.success();
+            return JsonMsg.fail().addInfo("login_error", "输入账号用户名与密码不匹配，请重新输入！");
+    }
+
+    /**
+     *
+     * @return
+     */
+    @RequestMapping(value = "/registePage", method = RequestMethod.GET)
+    public String registePage(){
+        return "registePage";
     }
 
     /**

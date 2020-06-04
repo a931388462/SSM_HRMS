@@ -22,8 +22,8 @@
                 <!-- 路径导航 -->
                 <div class="panel-heading">
                     <ol class="breadcrumb">
-                        <li><a href="#">员工管理</a></li>
-                        <li class="active">员工信息</li>
+                        <li><a href="#">个人中心</a></li>
+                        <li class="active">用户信息</li>
                     </ol>
                 </div>
                 <!-- Table -->
@@ -37,68 +37,28 @@
                     <th>操作</th>
                     </thead>
                     <tbody>
-                        <c:forEach items="${employees}" var="emp">
                             <tr>
-                                <td>${emp.empId}</td>
-                                <td>${emp.empName}</td>
-                                <td>${emp.empEmail}</td>
-                                <td>${emp.gender == "F"? "女": "男"}</td>
-                                <td>${emp.department.deptName}</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
                                 <td>
                                     <a href="#" role="button" class="btn btn-primary emp_edit_btn" data-toggle="modal" data-target=".emp-update-modal">编辑</a>
                                     <a href="#" role="button" class="btn btn-danger emp_delete_btn">删除</a>
                                 </td>
                             </tr>
-                        </c:forEach>
                     </tbody>
                 </table>
 
                 <div class="panel-body">
                     <div class="table_items">
-                        当前第<span class="badge">${curPage}</span>页，共有<span class="badge">${totalPages}</span>页，总记录数<span class="badge">${totalItems}</span>条。
+                        当前第<span class="badge">3</span>页，共有<span class="badge">2</span>页，总记录数<span class="badge">6</span>条。
                     </div>
                     <nav aria-label="Page navigation" class="pull-right">
                         <ul class="pagination">
                             <li><a href="/hrms/emp/getEmpList?pageNo=1">首页</a></li>
-                            <c:if test="${curPage==1}">
-                                <li class="disabled">
-                                    <a href="#" aria-label="Previous" class="prePage">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                            </c:if>
-                            <c:if test="${curPage!=1}">
-                                <li>
-                                    <a href="#" aria-label="Previous" class="prePage">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                            </c:if>
-
-                            <c:forEach begin="1" end="${totalPages<5?totalPages:5}" step="1" var="itemPage">
-                                <c:if test="${curPage == itemPage}">
-                                    <li class="active"><a href="/hrms/emp/getEmpList?pageNo=${itemPage}">${itemPage}</a></li>
-                                </c:if>
-                                <c:if test="${curPage != itemPage}">
-                                    <li><a href="/hrms/emp/getEmpList?pageNo=${itemPage}">${itemPage}</a></li>
-                                </c:if>
-                            </c:forEach>
-
-                            <c:if test="${curPage==totalPages}">
-                                <li class="disabled" class="nextPage">
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </c:if>
-                            <c:if test="${curPage!=totalPages}">
-                                <li>
-                                    <a href="#" aria-label="Next" class="nextPage">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </c:if>
-                            <li><a href="/hrms/emp/getEmpList?pageNo=${totalPages}">尾页</a></li>
+                            <li><a href="/hrms/emp/getEmpList?pageNo=4">尾页</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -115,25 +75,6 @@
 
 
 <script>
-    $(function () {
-        //上一页
-        var curPage = ${curPage};
-        var totalPages = ${totalPages};
-        $(".prePage").click(function () {
-            if (curPage > 1){
-                var pageNo = curPage-1;
-                $(this).attr("href", "/hrms/emp/getEmpList?pageNo="+pageNo);
-            }
-        });
-        //下一页
-        $(".nextPage").click(function () {
-            if (curPage < totalPages){
-                var pageNo = curPage+1;
-                $(this).attr("href", "/hrms/emp/getEmpList?pageNo="+pageNo);
-            }
-        });
-    })
-
     <!-- ==========================员工删除操作=================================== -->
     $(".emp_delete_btn").click(function () {
         var curPage = ${curPage};
