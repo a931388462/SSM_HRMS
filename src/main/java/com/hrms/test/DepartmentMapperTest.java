@@ -22,7 +22,7 @@ public class DepartmentMapperTest {
 
     @Test
     public void insertDeptTest(){
-        Department department = new Department(null, "榛庢槑3", "娴嬭瘯閮�");
+        Department department = new Department(null, "榛庢槑3", "娴嬭瘯閮�2020");
         int res = departmentMapper.insertDept(department);
         System.out.println(res);
     }
