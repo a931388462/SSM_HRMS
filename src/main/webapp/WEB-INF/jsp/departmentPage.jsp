@@ -21,30 +21,54 @@
                 <!-- 路径导航 -->
                 <div class="panel-heading">
                     <ol class="breadcrumb">
-                        <li><a href="#">部门管理</a></li>
-                        <li class="active">部门信息</li>
+                        <li><a href="#">数据查询</a></li>
+                        <li class="active">数据一览</li>
                     </ol>
                 </div>
                 <!-- Table -->
+                <div class="row" style="margin-top: 10px">
+                    <div class="col-md-3 col-md-push-9">
+                        <form class="form-inline">
+                            <div class="form-group">
+                            <select class="form-control">
+                                <option>2020 6-6</option>
+                                <option>2020 6-5</option>
+                            </select>
+                    </div>
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>设备a</option>
+                                    <option>设备b</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <table class="table table-bordered table-hover" id="dept_table">
                     <thead>
-                        <th>部门编号</th>
-                        <th>部门名称</th>
-                        <th>部门老大</th>
-                        <th>操作</th>
+                        <th>设备名</th>
+                        <th>时间</th>
+                        <th>温度(℃)</th>
+                        <th>湿度(%)</th>
+                        <th>粉尘浓度(mg/m³)</th>
                     </thead>
                     <tbody>
                         <c:forEach items="${departments}" var="dept">
                             <tr>
-                                <td>${dept.deptId}</td>
-                                <td>${dept.deptName}</td>
-                                <td>${dept.deptLeader}</td>
-                                <td>
-                                    <a href="#" role="button" class="btn btn-primary dept_edit_btn" data-toggle="modal" data-target=".dept-update-modal">编辑</a>
-                                    <a href="#" role="button" class="btn btn-danger dept_delete_btn">删除</a>
-                                </td>
+                                <td>设备a</td>
+                                <td>2020 6-4 20:00</td>
+                                <td>9</td>
+                                <td>46</td>
+                                <td>6.5</td>
                             </tr>
                         </c:forEach>
+                        <tr>
+                            <td>设备b</td>
+                            <td>2020 6-5 20:00</td>
+                            <td class="warning">99</td>
+                            <td>99</td>
+                            <td>99.5</td>
+                        </tr>
                     </tbody>
                 </table>
 

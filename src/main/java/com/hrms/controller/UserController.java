@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hrms.bean.TblEmp;
+import com.hrms.service.UserServiceImpl;
+import com.hrms.util.JsonMsg;
 import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -30,6 +33,8 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/hrms")
 public class UserController{
 
+    @Autowired
+    UserServiceImpl userServiceImpl;
 
     /**
      *
@@ -41,7 +46,27 @@ public class UserController{
         return mv;
     }
 
-
+    /**
+     * 密码变更
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/changePassword", method = RequestMethod.GET)
+    @ResponseBody
+    public JsonMsg changePassword(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        TblEmp tblEmp = (TblEmp) session.getAttribute("USER");
+        String password = request.getParameter("password");
+        String newPassword = request.getParameter("newPassword");
+        int flag = userServiceImpl.changpassword(tblEmp.getLoginName(), password, newPassword);
+        if (flag == 0){
+            return JsonMsg.success();
+        }else if(flag == 1){
+            return JsonMsg.fail().addInfo("login_error", "输入账号用户名与密码不匹配，请重新输入！");
+        }else{
+            return JsonMsg.fail().addInfo("login_error", "error");
+        }
+    }
 
     /**
      * 上传头像

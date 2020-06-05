@@ -26,27 +26,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" id="company_logo" href="#">大logo</a>
+                <a class="navbar-brand" id="company_logo" href="#">制药车间环境监控系统</a>
             </div>
 
             <div class="collapse navbar-collapse" id="hrms-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="#">公司介绍 <span class="sr-only">(current)</span>  </a>
-                    </li>
-                    <li><a href="#">人力资源部</a></li>
-                    <li><a href="#">请假申请</a></li>
-                    <li><a href="#">报销申请</a></li>
-                    <li><a href="#">出勤记录</a></li>
-                </ul>
-
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="站内搜索">
-                    </div>
-                    <button type="submit" class="btn btn-default">搜索</button>
-                </form>
-
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">账号管理 <span class="caret"></span></a>

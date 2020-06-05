@@ -8,7 +8,6 @@
             </a>
             <ul class="nav nav-pills nav-stacked" id="collapse_emp">
                 <li role="presentation"><a href="#" class="emp_info">用户信息</a></li>
-                <li role="presentation"><a href="#" role="button" class="emp_add_btn" data-toggle="modal" data-target=".emp-add-modal">修改密码</a></li>
                 <li role="presentation"><a href="#" class="changPassword">修改密码</a></li>
             </ul>
         </li>
@@ -16,12 +15,12 @@
     <ul class="nav nav-pills nav-stacked dept_sidebar">
         <li role="presentation" class="active">
             <a href="#"  data-toggle="collapse" data-target="#collapse_dept">
-                <span class="glyphicon glyphicon-cloud" aria-hidden="true">部门管理</span>
+                <span class="glyphicon glyphicon-cloud" aria-hidden="true">数据查询</span>
             </a>
             <ul class="nav nav-pills nav-stacked" id="collapse_dept">
-                <li role="presentation"><a href="#" class="dept_info">部门信息</a></li>
-                <li role="presentation"><a href="#" class="dept_add_btn" data-toggle="modal" data-target=".dept-add-modal">部门新增</a></li>
-                <li role="presentation"><a href="#" class="dept_clearall_btn">部门清零</a></li>
+                <li role="presentation"><a href="#" class="dept_info">数据一览</a></li>
+                <li role="presentation"><a href="#" class="dept_add_btn" data-toggle="modal" data-target=".dept-add-modal">xxxx</a></li>
+                <li role="presentation"><a href="#" class="dept_clearall_btn">xxxx</a></li>
             </ul>
         </li>
     </ul>
