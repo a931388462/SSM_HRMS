@@ -128,28 +128,13 @@ public class EmployeeController {
      * @return
      */
     @RequestMapping(value = "/getEmpList", method = RequestMethod.GET)
-    public ModelAndView getEmp(@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo){
+    public ModelAndView getEmp(Integer pageNo){
         ModelAndView mv = new ModelAndView("employeePage");
-        int limit = 5;
-        // 记录的偏移量(即从第offset行记录开始查询)，
-        // 如第1页是从第1行(offset=(21-1)*5=0,offset+1=0+1=1)开始查询；
-        // 第2页从第6行(offset=(2-1)*5=5,offset+1=5+1=6)记录开始查询
-        int offset = (pageNo-1)*limit;
-        //获取指定页数包含的员工信息
-        List<Employee> employees = employeeService.getEmpList(offset, limit);
-        //获取总的记录数
-        int totalItems = employeeService.getEmpCount();
-        //获取总的页数
-        int temp = totalItems / limit;
-        int totalPages = (totalItems % limit == 0) ? temp : temp+1;
-        //当前页数
-        int curPage = pageNo;
-
         //将上述查询结果放到Model中，在JSP页面中可以进行展示
-        mv.addObject("employees", employees)
-                .addObject("totalItems", totalItems)
-                .addObject("totalPages", totalPages)
-                .addObject("curPage", curPage);
+        mv.addObject("employees", 1)
+                .addObject("totalItems", "")
+                .addObject("totalPages", "")
+                .addObject("curPage", "");
         return mv;
     }
 

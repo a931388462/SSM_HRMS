@@ -16,6 +16,14 @@
     <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+    <style type="text/css">
+        body{
+            background:
+                    url("${pageContext.request.contextPath}/static/img/back.jpg") no-repeat;
+            background-size: 100%;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -67,15 +75,7 @@
     });
     $(function () {
         $("#registe_btn").click(function () {
-            $.ajax({
-                url:"${pageContext.request.contextPath}" + "/hrms/doregiste",
-                type:"POST",
-                data:$("#login_form").serialize(),
-                success:function (result) {
                    window.location.href = "${pageContext.request.contextPath}"+"/hrms/registePage";
-                }
-
-            });
         });
     });
 </script>

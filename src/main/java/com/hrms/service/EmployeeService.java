@@ -17,6 +17,8 @@ public class EmployeeService {
     @Autowired
     EmployeeMapper employeeMapper;
 
+    //public boolean login()
+
     public int getEmpCount(){
         return employeeMapper.countEmps();
     }

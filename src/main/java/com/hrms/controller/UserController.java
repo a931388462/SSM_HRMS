@@ -27,15 +27,28 @@ import org.springframework.web.servlet.view.RedirectView;
  *
  */
 @Controller
-@Scope("prototype")
-@RequestMapping("/upload")
+@RequestMapping("/hrms")
 public class UserController{
+
+
+    /**
+     *
+     * @return
+     */
+    @RequestMapping(value = "/changePasswordPage", method = RequestMethod.GET)
+    public ModelAndView changePasswordPage(){
+        ModelAndView mv = new ModelAndView("changePassword");
+        return mv;
+    }
+
+
+
     /**
      * 上传头像
      * @param upload
      * @return
      */
-     @RequestMapping("/avatar")
+     @RequestMapping("/uploadAvatar")
      @ResponseBody
       public String uploadAvatar(MultipartFile upload){
           //fileService.upLoadFile(upload);
