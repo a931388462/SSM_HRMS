@@ -58,5 +58,24 @@ public class UserServiceImpl {
         return true;
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @param newPassword
+     * @return 1密码错误 0成功
+     */
+    public int changpassword(String username,String password,String newPassword){
+        TblEmp tblEmp = login(username, password);
+        if (tblEmp==null){
+            return 1;
+        }
+        tblEmp.setLoginPassword(newPassword);
+        tblEmpMapper.updateByPrimaryKeySelective(tblEmp);
+        return 0;
+    }
+
+
+
 
 }
