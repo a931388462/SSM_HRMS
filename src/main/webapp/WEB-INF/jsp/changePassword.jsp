@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 col-md-offset-2">
-                                <button class="btn btn-default" type="submit" id="changePW_btn">提交</button>
+                                <button class="btn btn-default" type="button" id="changePW_btn">提交</button>
                             </div>
                             <br>
                         </form>
@@ -64,25 +64,42 @@
 </div><!-- /.container -->
 
 <script type="text/javascript">
-
-
     function checkPW(){
-
-
+        var password = $("#password").val();
+        var newPassword = $("#newPassword").val();
+        var newPassword2 = $("#newPassword2").val();
+        if (password==""){
+            alert("请输入密码");
+            return false;
+        }
+        if (newPassword==""){
+            alert("请输入新密码");
+            return false;
+        }
+        if (newPassword2==""){
+            alert("请再次输入新密码");
+            return false;
+        }
+        if (newPassword != newPassword2){
+            alert("两次输入的密码不相同");
+            return false;
+        }
+        return  true;
     }
 
 
     $(function () {
         $("#changePW_btn").click(function () {
-            $.ajax({
-                url:"${pageContext.request.contextPath}" + "/hrms/changePassword",
-                type:"POST",
-                data:$("#changePWForm").serialize(),
-                success:function (result) {
-                    window.location.href= "${pageContext.request.contextPath}"+"/hrms/main";
-                }
-
-            });
+            if (checkPW()){
+                $.ajax({
+                    url:"${pageContext.request.contextPath}" + "/hrms/changePassword",
+                    type:"POST",
+                    data:$("#changePWForm").serialize(),
+                    success:function (result) {
+                        alert("密码修改成功")
+                    }
+                });
+            }
         });
     });
 </script>

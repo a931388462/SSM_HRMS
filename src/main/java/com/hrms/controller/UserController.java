@@ -1,6 +1,10 @@
 package com.hrms.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -68,17 +72,44 @@ public class UserController{
         }
     }
 
+
     /**
      * 上传头像
-     * @param upload
+     * @param file
      * @return
      */
-     @RequestMapping("/uploadAvatar")
-     @ResponseBody
-      public String uploadAvatar(MultipartFile upload){
-          //fileService.upLoadFile(upload);
-          return "ok";
-      }
-    
+    @RequestMapping("/uploadAvatar")
+    @ResponseBody
+    public JsonMsg uploadAvatar(MultipartFile file,HttpServletRequest request){
+        System.out.println(file);
+        String fileName = file.getOriginalFilename();
+        String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
+        //图片类型进行限制
+        if(!("jpg".equals(suffix) || "jpeg".equals(suffix))){
+            return JsonMsg.fail().addInfo("login_error", "请上传jpg或JPEG图片!");
+        }
+
+        TblEmp tblEmp = (TblEmp) request.getSession().getAttribute("USER");
+        String loginName = "test";
+        //获得文件的名称
+        fileName = loginName + new Date().getTime() + suffix;
+
+        //[3]获得服务器目录
+        // E:\apache-tomcat-7.0.79\webapps\springmvc03\imgs
+        String realPath = request.getServletContext().getRealPath("/static/img/portrait");
+        //创建目录
+        File filePath = new File(realPath,fileName);
+        if(!filePath.exists()){
+            filePath.mkdirs();
+        }
+        //把文件上传到指定的目录中
+        try {
+            file.transferTo(filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return JsonMsg.success();
+    }
+
  
 }

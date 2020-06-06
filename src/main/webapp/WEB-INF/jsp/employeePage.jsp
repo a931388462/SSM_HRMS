@@ -34,25 +34,28 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">头像</label>
                                 <div class="col-sm-2">
-                                    <img src="${pageContext.request.contextPath}/static/img/portrait/defult.jpg" alt="..." class="img-circle img-responsive"">
+                                    <img src="${pageContext.request.contextPath}/static/img/portrait/defult.jpg" alt="..." class="img-circle img-responsive">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="file" id="exampleInputFile">
                                 </div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-default" type="submit">更换</button>
+                                    <button class="btn btn-default" id="chgPortrait_btn" type="button">更换</button>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="userName" class="col-sm-2 control-label">账号</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" id="userName" type="text" placeholder="Readonly input here…" readonly>
+                                    <input class="form-control" id="userName" type="text" placeholder="您还没有账号" value="${USER.loginName}" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="namename" class="col-sm-2 control-label">用户名</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" id="namename" type="text" placeholder="Readonly input here…" value="xxxxxxxxxx" readonly>
+                                    <input class="form-control" id="namename" type="text" placeholder="您还没有用户名" value="${USER.empName}" readonly>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-default" type="submit">更换</button>
+                                    <button class="btn btn-default" id="changeName_btn" type="button">更换</button>
                                 </div>
                             </div>
                         </form>
@@ -67,6 +70,49 @@
 </div><!-- /.container -->
 
 <script>
+    //避免重复提交
+    var changFlag = false;
+    //移除只读状态
+    $("#changeName_btn").click(function(){
+        $("#namename").removeAttr("readonly");
+        changFlag = true;
+    });
+
+    //追加只读状态
+    $("#namename").blur(function(){
+        //避免重复提交
+        if (changFlag){
+            $("#namename").attr("readonly","readonly");
+            alert("修改用户名成功");
+            changFlag = false;
+        }
+    });
+
+    //头像变更
+    $("#chgPortrait_btn").click(function(){
+        var formData = new FormData();
+        var file = $("#exampleInputFile")[0].files[0];
+        if (file == null){
+            alert("请选择一张图片")
+            return;
+        }
+        formData.append("file",$("#exampleInputFile")[0].files[0]);
+        $.ajax({
+            url:"${pageContext.request.contextPath}" + "/hrms/uploadAvatar",
+            type:'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success:function(result){
+                alert("上传成功")
+            }
+        })
+    });
+
+
+
+
+
 
 </script>
 </body>
