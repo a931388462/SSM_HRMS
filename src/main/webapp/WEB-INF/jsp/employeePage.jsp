@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">头像</label>
                                 <div class="col-sm-2">
-                                    <img src="${pageContext.request.contextPath}/static/img/portrait/defult.jpg" alt="..." class="img-circle img-responsive">
+                                    <img id="userPortrait" src="${pageContext.request.contextPath}/static/img/portrait/${USER.portrait}" alt="..." class="img-circle img-responsive">
                                 </div>
                                 <div class="col-sm-6">
                                     <input type="file" id="exampleInputFile">
@@ -83,7 +83,18 @@
         //避免重复提交
         if (changFlag){
             $("#namename").attr("readonly","readonly");
-            alert("修改用户名成功");
+            $.ajax({
+                url:"${pageContext.request.contextPath}" + "/hrms/chgNamename",
+                type:"POST",
+                data:{namename:$("#namename").val()},
+                success:function (result) {
+                    if(result.code == 100){
+                        alert("修改成功");
+                    }else {
+                        alert(result.extendInfo.login_error);
+                    }
+                }
+            })
             changFlag = false;
         }
     });
@@ -104,7 +115,8 @@
             contentType: false,
             processData: false,
             success:function(result){
-                alert("上传成功")
+                alert("上传成功");
+                $("#userPortrait").attr('src',"${pageContext.request.contextPath}/static/img/portrait/"+result.extendInfo.picname);
             }
         })
     });

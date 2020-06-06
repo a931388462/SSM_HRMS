@@ -30,15 +30,31 @@
                     <div class="col-md-3 col-md-push-9">
                         <form class="form-inline">
                             <div class="form-group">
-                            <select class="form-control">
-                                <option>2020 6-6</option>
-                                <option>2020 6-5</option>
+                            <select id="monitoringTime" class="form-control">
+                                <c:forEach items="${monitoringTimeStrList}" var="monitoringTimeStr">
+                                    <c:choose>
+                                        <c:when test="${selMonitoringTimeStr eq monitoringTimeStr}">
+                                            <option value="${monitoringTimeStr}" selected = "selected" >${monitoringTimeStr}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${monitoringTimeStr}">${monitoringTimeStr}</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
                             </select>
                     </div>
                             <div class="form-group">
-                                <select class="form-control">
-                                    <option>设备a</option>
-                                    <option>设备b</option>
+                                <select id="deviceName" class="form-control">
+                                    <c:forEach items="${deviceNameList}" var="deviceName">
+                                        <c:choose>
+                                            <c:when test="${selDeviceName eq deviceName}">
+                                                <option value="${deviceName}" selected = "selected" >${deviceName}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${deviceName}">${deviceName}</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </form>
@@ -53,22 +69,15 @@
                         <th>粉尘浓度(mg/m³)</th>
                     </thead>
                     <tbody>
-                        <c:forEach items="${departments}" var="dept">
-                            <tr>
-                                <td>设备a</td>
-                                <td>2020 6-4 20:00</td>
-                                <td>9</td>
-                                <td>46</td>
-                                <td>6.5</td>
-                            </tr>
-                        </c:forEach>
+                    <c:forEach items="${allEnvMonDatas}" var="envMonData">
                         <tr>
-                            <td>设备b</td>
-                            <td>2020 6-5 20:00</td>
-                            <td class="warning">99</td>
-                            <td>99</td>
-                            <td>99.5</td>
+                            <td>${envMonData.deviceName}</td>
+                            <td>${envMonData.monitoringTimeStr}</td>
+                            <td>${envMonData.temperature}</td>
+                            <td>${envMonData.humidity}</td>
+                            <td>${envMonData.dustConcentration}</td>
                         </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
 
@@ -124,54 +133,26 @@
             </div><!-- /.panel panel-success -->
         </div><!-- /.dept_info -->
     </div><!-- /.hrms_dept_body -->
-
-    <%@ include file="departmentAdd.jsp"%>
-    <%@ include file="departmentUpdate.jsp"%>
-
     <!-- 尾部-->
     <%@ include file="./commom/foot.jsp"%>
 
 </div><!-- /.hrms_dept_container -->
 
 <script type="text/javascript">
-    var curPageNo = ${curPageNo};
-    var totalPages = ${totalPages};
-    //上一页
-    $(".prePage").click(function () {
-         if (curPageNo > 1){
-             var pageNo = curPageNo - 1;
-             $(this).attr("href", "/hrms/dept/getDeptList?pageNo="+pageNo);
-         }
+    //根据设备名检索
+    $("#deviceName").change(function(){
+        var deviceName = $('#deviceName').val();
+        var monitoringTime = $('#monitoringTime').val();
+        window.location.href= "${pageContext.request.contextPath}"+"/hrms/getEnvironmentalMonitoring?deviceName=" + deviceName +"&monitoringTime=" + monitoringTime;
     });
-    //下一页
-    $(".nextPage").click(function () {
-        if (curPageNo < totalPages){
-            var pageNo = curPageNo + 1;
-            $(this).attr("href", "/hrms/dept/getDeptList?pageNo="+pageNo);
-        }
+    //根据设备名检索
+    $("#monitoringTime").change(function(){
+        var deviceName = $('#deviceName').val();
+        var monitoringTime = $('#monitoringTime').val();
+        window.location.href= "${pageContext.request.contextPath}"+"/hrms/getEnvironmentalMonitoring?deviceName=" + deviceName +"&monitoringTimeStr=" + monitoringTime;
     });
 
 
-    <!-- ==========================部门删除操作=================================== -->
-    $(".dept_delete_btn").click(function () {
-        var delDeptId = $(this).parent().parent().find("td:eq(0)").text();
-        var delDeptName = $(this).parent().parent().find("td:eq(1)").text();
-        var curPageNo = ${curPageNo};
-        if (confirm("确认删除【"+ delDeptName +"】的信息吗？")){
-            $.ajax({
-                url:"${pageContext.request.contextPath}" + "/hrms/dept/delDept/"+delDeptId,
-                type:"DELETE",
-                success:function (result) {
-                    if (result.code == 100){
-                        alert("删除成功！");
-                        window.location.href = "${pageContext.request.contextPath}" + "/hrms/dept/getDeptList?pageNo="+curPageNo;
-                    }else {
-                        alert(result.extendInfo.del_dept_error);
-                    }
-                }
-            });
-        }
-    });
 </script>
 </body>
 </html>

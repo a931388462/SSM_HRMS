@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,6 +74,21 @@ public class UserController{
         }
     }
 
+    /**
+     * 用户名变更
+     * @param request
+     * @param namename
+     * @return
+     */
+    @RequestMapping(value = "/chgNamename", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonMsg changePassword(HttpServletRequest request , String namename){
+        HttpSession session = request.getSession();
+        TblEmp tblEmp = (TblEmp) session.getAttribute("USER");
+        tblEmp.setEmpName(namename);
+        userServiceImpl.updateUserInfo(tblEmp);
+        return JsonMsg.success();
+    }
 
     /**
      * 上传头像
@@ -81,7 +98,6 @@ public class UserController{
     @RequestMapping("/uploadAvatar")
     @ResponseBody
     public JsonMsg uploadAvatar(MultipartFile file,HttpServletRequest request){
-        System.out.println(file);
         String fileName = file.getOriginalFilename();
         String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
         //图片类型进行限制
@@ -90,10 +106,10 @@ public class UserController{
         }
 
         TblEmp tblEmp = (TblEmp) request.getSession().getAttribute("USER");
-        String loginName = "test";
+        String loginName = tblEmp.getLoginName();
         //获得文件的名称
-        fileName = loginName + new Date().getTime() + suffix;
-
+        fileName = loginName + new Date().getTime() + "." + suffix;
+        tblEmp.setPortrait(fileName);
         //[3]获得服务器目录
         // E:\apache-tomcat-7.0.79\webapps\springmvc03\imgs
         String realPath = request.getServletContext().getRealPath("/static/img/portrait");
@@ -108,8 +124,11 @@ public class UserController{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return JsonMsg.success();
+        userServiceImpl.updateUserInfo(tblEmp);
+        JsonMsg jsonMsg = JsonMsg.success();
+        Map<String,Object> map = new HashMap();
+        map.put("picname",fileName);
+        jsonMsg.setExtendInfo(map);
+        return jsonMsg;
     }
-
- 
 }

@@ -36,9 +36,9 @@
     $(".changPassword").click(function () {
         $(this).attr("href", "${pageContext.request.contextPath}"+"/hrms/changePasswordPage");
     });
-    //跳转到部门页面
+    //跳转到监测页面
     $(".dept_info").click(function () {
-        $(this).attr("href", "${pageContext.request.contextPath}"+"/hrms/dept/getDeptList");
+        $(this).attr("href", "${pageContext.request.contextPath}"+"/hrms/getEnvironmentalMonitoring");
     });
     //部门清零这个功能暂未实现
     $(".dept_clearall_btn").click(function () {

@@ -75,6 +75,15 @@ public class UserServiceImpl {
         return 0;
     }
 
+    /**
+     * 更新用户信息
+     * @param tblEmp
+     * @return
+     */
+    public void updateUserInfo(TblEmp tblEmp){
+        tblEmpMapper.updateByPrimaryKeySelective(tblEmp);
+    }
+
 
 
 
