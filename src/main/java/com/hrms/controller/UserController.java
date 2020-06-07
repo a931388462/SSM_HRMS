@@ -57,7 +57,7 @@ public class UserController{
      * @param request
      * @return
      */
-    @RequestMapping(value = "/changePassword", method = RequestMethod.GET)
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     @ResponseBody
     public JsonMsg changePassword(HttpServletRequest request){
         HttpSession session = request.getSession();
