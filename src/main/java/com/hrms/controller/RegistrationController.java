@@ -1,6 +1,7 @@
 package com.hrms.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.hrms.bean.TblEmp;
 import com.hrms.service.UserServiceImpl;
@@ -39,6 +40,9 @@ public class RegistrationController {
         tblEmp.setLoginPassword(password);
         boolean flag = userServiceImpl.registe(tblEmp);
         if (flag) {
+            tblEmp = userServiceImpl.login(username, password);
+            HttpSession session = request.getSession();
+            session.setAttribute("USER",tblEmp);
             return JsonMsg.success();
         }else {
             return JsonMsg.fail().addInfo("login_error", "输入账号用户名与密码不匹配，请重新输入！");
