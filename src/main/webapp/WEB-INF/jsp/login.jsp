@@ -57,7 +57,6 @@
 <script type="text/javascript">
     $(function () {
         $("#login_btn").click(function () {
-        	debugger;
             $.ajax({
                 url:"${pageContext.request.contextPath}" + "/hrms/dologin",
                 type:"POST",
