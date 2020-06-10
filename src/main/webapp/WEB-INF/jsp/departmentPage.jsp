@@ -73,9 +73,30 @@
                         <tr>
                             <td>${envMonData.deviceName}</td>
                             <td>${envMonData.monitoringTimeStr}</td>
-                            <td>${envMonData.temperature}</td>
-                            <td>${envMonData.humidity}</td>
-                            <td>${envMonData.dustConcentration}</td>
+                            <c:choose>
+                                <c:when test="${envMonData.temperature > 8 && envMonData.temperature < 15}">
+                                    <td>${envMonData.temperature}</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td class="warning">${envMonData.temperature}</td>
+                                </c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${envMonData.humidity > 45 && envMonData.humidity < 55}">
+                                    <td>${envMonData.humidity}</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td class="warning">${envMonData.humidity}</td>
+                                </c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${envMonData.dustConcentration < 8.0}">
+                                    <td>${envMonData.dustConcentration}</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td class="warning">${envMonData.dustConcentration}</td>
+                                </c:otherwise>
+                            </c:choose>
                         </tr>
                     </c:forEach>
                     </tbody>

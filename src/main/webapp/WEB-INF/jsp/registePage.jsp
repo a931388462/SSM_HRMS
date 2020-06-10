@@ -47,6 +47,7 @@
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
                             <a href="javascript:void(0)" class="btn btn-lg btn-success btn-block" id='registe_btn'>注册</a>
+                            <a href="javascript:void(0)" class="btn btn-lg btn-success btn-block" id='login_btn'>回到登录</a>
                         </fieldset>
                     </form>
 
@@ -68,6 +69,11 @@
                 }
 
             });
+        });
+    });
+    $(function () {
+        $("#login_btn").click(function () {
+            window.location.href= "${pageContext.request.contextPath}"+"/hrms/login";
         });
     });
 </script>

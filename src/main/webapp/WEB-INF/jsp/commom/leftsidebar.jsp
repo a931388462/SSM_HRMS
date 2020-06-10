@@ -19,8 +19,6 @@
             </a>
             <ul class="nav nav-pills nav-stacked" id="collapse_dept">
                 <li role="presentation"><a href="#" class="dept_info">数据一览</a></li>
-                <li role="presentation"><a href="#" class="dept_add_btn" data-toggle="modal" data-target=".dept-add-modal">xxxx</a></li>
-                <li role="presentation"><a href="#" class="dept_clearall_btn">xxxx</a></li>
             </ul>
         </li>
     </ul>
