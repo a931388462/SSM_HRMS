@@ -5,10 +5,6 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
-/**
- * @author GenshenWang.nomico
- * @date 2018/3/5.
- */
 public interface DepartmentMapper {
 
     String TABLE_NAME = "tbl_dept";

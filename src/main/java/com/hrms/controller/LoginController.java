@@ -14,10 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/**
- * @author GenshenWang.nomico
- * @date 2018/3/9.
- */
 @Controller
 @RequestMapping(value = "/hrms")
 public class LoginController {

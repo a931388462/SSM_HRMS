@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>部门管理页面</title>
+    <title>数据一览页面</title>
 </head>
 <body>
 <div class="hrms_dept_container">
@@ -101,56 +101,6 @@
                     </c:forEach>
                     </tbody>
                 </table>
-
-                <div class="panel-body">
-                    <div class="table_items">
-                        当前第<span class="badge">${curPageNo}</span>页，共有<span class="badge">${totalPages}</span>页，总记录数<span class="badge">${totalItems}</span>条。
-                    </div>
-                    <nav aria-label="Page navigation" class="pull-right">
-                        <ul class="pagination">
-                            <li><a href="/hrms/dept/getDeptList?pageNo=1">首页</a></li>
-                            <c:if test="${curPageNo==1}">
-                                <li class="disabled">
-                                    <a href="#" aria-label="Previous" class="prePage">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                            </c:if>
-                            <c:if test="${curPageNo!=1}">
-                                <li>
-                                    <a href="#" aria-label="Previous" class="prePage">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                            </c:if>
-
-                            <c:forEach begin="1" end="${totalPages<5?totalPages:5}" step="1" var="itemPage">
-                                <c:if test="${curPageNo == itemPage}">
-                                    <li class="active"><a href="/hrms/dept/getDeptList?pageNo=${itemPage}">${itemPage}</a></li>
-                                </c:if>
-                                <c:if test="${curPageNo != itemPage}">
-                                    <li><a href="/hrms/dept/getDeptList?pageNo=${itemPage}">${itemPage}</a></li>
-                                </c:if>
-                            </c:forEach>
-
-                            <c:if test="${curPageNo==totalPages}">
-                                <li class="disabled" class="nextPage">
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </c:if>
-                            <c:if test="${curPageNo!=totalPages}">
-                                <li>
-                                    <a href="#" aria-label="Next" class="nextPage">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </c:if>
-                            <li><a href="/hrms/dept/getDeptList?pageNo=${totalPages}">尾页</a></li>
-                        </ul>
-                    </nav>
-                </div>
             </div><!-- /.panel panel-success -->
         </div><!-- /.dept_info -->
     </div><!-- /.hrms_dept_body -->

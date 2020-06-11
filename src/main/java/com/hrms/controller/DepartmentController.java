@@ -10,10 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-/**
- * @author GenshenWang.nomico
- * @date 2018/3/8.
- */
 @Controller
 @RequestMapping(value = "/hrms/dept")
 public class DepartmentController {

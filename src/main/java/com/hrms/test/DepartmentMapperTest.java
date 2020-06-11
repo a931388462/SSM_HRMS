@@ -10,10 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-/**
- * @author GenshenWang.nomico
- * @date 2018/3/5.
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:springmvc.xml"})
 public class DepartmentMapperTest {

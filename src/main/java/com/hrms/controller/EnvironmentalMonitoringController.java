@@ -12,10 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-/**
- * @author GenshenWang.nomico
- * @date 2018/3/9.
- */
 @Controller
 @RequestMapping(value = "/hrms")
 public class EnvironmentalMonitoringController {

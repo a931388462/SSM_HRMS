@@ -1,9 +1,5 @@
 package com.hrms.bean;
 
-/**
- * @author GenshenWang.nomico
- * @date 2018/3/5.
- */
 public class Department {
     private Integer deptId;
     private String deptLeader;

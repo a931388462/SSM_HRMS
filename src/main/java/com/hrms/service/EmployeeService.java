@@ -7,10 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @author GenshenWang.nomico
- * @date 2018/3/7.
- */
 @Service
 public class EmployeeService {
 
